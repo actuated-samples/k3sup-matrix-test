@@ -25,7 +25,8 @@ jobs:
       - name: Create Kubernetes ${{ matrix.k3s }} cluster
         run: |
           arkade get k3sup
-          $HOME/.arkade/bin/k3sup install --local --k3s-channel ${{ matrix.k3s }}
+          mkdir $HOME/.kube
+          $HOME/.arkade/bin/k3sup install --local --k3s-channel ${{ matrix.k3s }} --local-path $HOME/.kube
 
       - name: Test crds
         run: |
