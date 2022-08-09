@@ -26,7 +26,7 @@ jobs:
         run: |
           arkade get k3sup
           mkdir -p $HOME/.kube/
-          $HOME/.arkade/bin/k3sup install --local --k3s-channel ${{ matrix.k3s }} --local-path $HOME/.kube/
+          $HOME/.arkade/bin/k3sup install --local --k3s-channel ${{ matrix.k3s }} --local-path $HOME/.kube/kubeconfig
 
       - name: Test crds
         run: |
