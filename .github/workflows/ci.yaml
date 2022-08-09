@@ -27,9 +27,11 @@ jobs:
           arkade get k3sup
           mkdir -p $HOME/.kube/
           $HOME/.arkade/bin/k3sup install --local --k3s-channel ${{ matrix.k3s }} --local-path $HOME/.kube/kubeconfig
+          cat $HOME/.kube/kubeconfig
 
       - name: Test crds
         run: |
+          export KUBECONFIG=$HOME/.kube/kubeconfig
           echo "waiting for nodes to be ready ..."
           kubectl wait --for=condition=Ready nodes --all --timeout=5m
           kubectl get nodes
