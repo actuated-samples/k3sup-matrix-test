@@ -26,8 +26,12 @@ jobs:
         run: |
           arkade get k3sup
           mkdir -p $HOME/.kube/
-          $HOME/.arkade/bin/k3sup install --local --k3s-channel ${{ matrix.k3s }} --local-path $HOME/.kube/kubeconfig
+          $HOME/.arkade/bin/k3sup install \
+            --local \
+            --k3s-channel ${{ matrix.k3s }} \
+            --local-path $HOME/.kube/kubeconfig
           cat $HOME/.kube/kubeconfig
+          kubectl config use-context default
       - name: Wait for nodes to be ready
         run: |
           for i in {1..10};
