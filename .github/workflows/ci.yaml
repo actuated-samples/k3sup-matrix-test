@@ -32,7 +32,7 @@ jobs:
             --local-path $HOME/.kube/config \
             --merge \
             --context k3s
-          cat $$HOME/.kube/config
+          cat $HOME/.kube/config
 
           kubectl config use-context k3s
       - name: Wait for nodes to be ready
