@@ -18,7 +18,7 @@ jobs:
     strategy:
       matrix:
 #        k3s: [v1.17, v1.18, v1.19, v1.20, v1.21, v1.22, v1.23]
-        k3s: [v1.19, v1.22, v1.23, v1.24]
+        k3s: [v1.23, v1.24]
     steps:
       - uses: actions/checkout@v1
 
@@ -28,7 +28,19 @@ jobs:
           mkdir -p $HOME/.kube/
           $HOME/.arkade/bin/k3sup install --local --k3s-channel ${{ matrix.k3s }} --local-path $HOME/.kube/kubeconfig
           cat $HOME/.kube/kubeconfig
-
+      - name: Wait for nodes to be ready
+        run: |
+          for i in {1..10};
+          do
+            kubectl wait --for=condition=ready node --all --timeout=300s
+            retVal=$?
+            if [ "$retVal" -eq "0" ];
+            then
+              echo "Node ready"
+              break
+            fi
+            sleep 2
+          done
       - name: Test crds
         run: |
           export KUBECONFIG=$HOME/.kube/kubeconfig
