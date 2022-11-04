@@ -38,7 +38,7 @@ jobs:
             --context default
           cat $HOME/.kube/config
           
-          k3sup wait --context default
+          k3sup ready --context default
           kubectl config use-context default
           
           # Just an extra test on top.
