@@ -11,47 +11,43 @@ on:
 
 jobs:
   kubernetes:
-    concurrency: 4
+#    concurrency: 4
     name: Kubernetes
     runs-on: actuated
     strategy:
       matrix:
-       k3s: [v1.17, v1.18, v1.19, v1.20, v1.21, v1.22, v1.23, v1.24]
+        k3s: [v1.16]
+#       k3s: [v1.17, v1.18, v1.19, v1.20, v1.21, v1.22, v1.23, v1.24]
 #         k3s: [v1.21,v1.22,v1.23, v1.24]
 
     steps:
       - uses: actions/checkout@v1
+      - uses: alexellis/setup-arkade@v2
+      - uses: alexellis/arkade-get@master
+        with:
+          kubectl: ${{ matrix.k3s }}
+          k3sup: latest
 
       - name: Create Kubernetes ${{ matrix.k3s }} cluster
         run: |
-          arkade get k3sup
           mkdir -p $HOME/.kube/
-          $HOME/.arkade/bin/k3sup install \
+          k3sup install \
             --local \
             --k3s-channel ${{ matrix.k3s }} \
             --local-path $HOME/.kube/config \
             --merge \
-            --context k3s
+            --context default
           cat $HOME/.kube/config
-
-          kubectl config use-context k3s
-      - name: Wait for nodes to be ready
-        run: |
-          for i in {1..10};
-          do
-            retVal=$(kubectl wait --for=condition=ready node --all --timeout=300s || echo -n "retry")
-
-            if [ "$retVal" -nq "retry" ];
-            then
-              echo "Node ready"
-              break
-            fi
-            sleep 2
-          done
+          
+          k3sup wait --context default
+          kubectl config use-context default
+          
+          # Just an extra test on top.
+          echo "Waiting for nodes to be ready ..."
+          kubectl wait --for=condition=Ready nodes --all --timeout=5m
+          kubectl get nodes -o wide
+          
       - name: Test crds
         run: |
-          echo "waiting for nodes to be ready ..."
-          kubectl wait --for=condition=Ready nodes --all --timeout=5m
-          kubectl get nodes
           echo "Applying CRD"
           kubectl apply -f https://raw.githubusercontent.com/inlets/inlets-operator/master/artifacts/crds/inlets.inlets.dev_tunnels.yaml
