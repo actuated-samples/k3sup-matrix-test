@@ -16,7 +16,7 @@ jobs:
     runs-on: actuated-aarch64
     strategy:
       matrix:
-        k3s: [v1.25]
+        k3s: [v1.16,v1.21,v1.22, v1.24, v1.25]
 
     steps:
       - uses: actions/checkout@v1
