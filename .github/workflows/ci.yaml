@@ -56,5 +56,5 @@ jobs:
       - name: Test crds
         run: |
           echo "Applying CRD"
-          kubectl apply -f https://raw.githubusercontent.com/inlets/inlets-operator/master/artifacts/crds/inlets.inlets.dev_tunnels.yaml
-
+          kubectl apply -f https://raw.githubusercontent.com/openfaas/faas-netes/master/artifacts/crds/openfaas.com_functions.yaml
+          
