@@ -14,7 +14,7 @@ on:
 jobs:
   kubernetes:
     name: k3s-test-${{ matrix.k3s }}
-    runs-on: actuated
+    runs-on: ubuntu-latest
 
     strategy:
       matrix:
