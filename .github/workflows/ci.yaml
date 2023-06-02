@@ -23,7 +23,6 @@ jobs:
       - uses: actions/checkout@v1
       - name: Setup mirror
         uses: self-actuated/hub-mirror@master
-      - uses: alexellis/setup-arkade@v2
       - uses: alexellis/arkade-get@master
         with:
           kubectl: latest
