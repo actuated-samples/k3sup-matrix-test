@@ -13,13 +13,14 @@ on:
 jobs:
   kubernetes:
     name: k3s-test-${{ matrix.k3s }}
-    runs-on: actuated-arm64-2cpu-8gb
+    runs-on: actuated-arm64-4cpu-16gb
 
     strategy:
       matrix:
 #         k3s: [v1.16, v1.17, v1.18, v1.19, v1.20, v1.21, v1.22, v1.23, v1.24, v1.25, v1.26, v1.27]
         k3s:
          - v1.27
+         - v1.26
     steps:
       - uses: actions/checkout@v1
       - name: Setup mirror
