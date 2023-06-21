@@ -56,4 +56,5 @@ jobs:
         run: |
           echo "Applying CRD"
           kubectl apply -f https://raw.githubusercontent.com/openfaas/faas-netes/master/artifacts/crds/openfaas.com_functions.yaml
-          
+
+
