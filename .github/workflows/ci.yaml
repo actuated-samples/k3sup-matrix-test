@@ -15,7 +15,6 @@ jobs:
     name: k3s-test-${{ matrix.k3s }}
     runs-on: actuated-arm64-1cpu-2gb
 
-
     strategy:
       max-parallel: 1
       matrix:
