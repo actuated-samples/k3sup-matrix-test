@@ -10,6 +10,11 @@ on:
       - main
   workflow_dispatch:
 
+permissions:
+  id-token: write
+  contents: read
+  actions: read
+
 jobs:
   kubernetes:
     name: k3s-test-${{ matrix.k3s }}
@@ -18,7 +23,8 @@ jobs:
     strategy:
 #      max-parallel: 1
       matrix:
-        k3s: [v1.16, v1.17,v1.18,v1.19,v1.20]
+#        k3s: [v1.16, v1.17,v1.18,v1.19,v1.20]
+      k3s: [v1.19]
 #        k3s: [v1.16, v1.17, v1.18, v1.19, v1.20, v1.21, v1.22, v1.23, v1.24, v1.25, v1.26, v1.27]
     steps:
       - uses: actions/checkout@v1
@@ -40,7 +46,9 @@ jobs:
             --merge \
             --context default
           cat $HOME/.kube/config
-          
+
+      - uses: self-actuated/connect-ssh@master
+
       - name: Wait until K3s ${{ matrix.k3s }} is ready
         run: |
           k3sup ready --context default --pause 5s
