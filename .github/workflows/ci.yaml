@@ -18,7 +18,7 @@ permissions:
 jobs:
   kubernetes:
     name: k3s-test-${{ matrix.k3s }}
-    runs-on: actuated-2cpu-4gb
+    runs-on: ubuntu-latest
 
     strategy:
 #      max-parallel: 1
