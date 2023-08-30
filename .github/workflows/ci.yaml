@@ -13,7 +13,7 @@ on:
 jobs:
   kubernetes:
     name: k3s-test-${{ matrix.k3s }}
-    runs-on: actuated-arm64-2cpu-8gb
+    runs-on: actuated-2cpu-4gb
 
     strategy:
 #      max-parallel: 1
@@ -58,4 +58,7 @@ jobs:
           echo "Applying CRD"
           kubectl apply -f https://raw.githubusercontent.com/openfaas/faas-netes/master/artifacts/crds/openfaas.com_functions.yaml
 
+      - name: Show k3s logs
+        if: always()
+        run: journalctl -u k3s
 
