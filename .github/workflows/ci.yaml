@@ -43,7 +43,7 @@ jobs:
           
       - name: Wait until K3s ${{ matrix.k3s }} is ready
         run: |
-          k3sup ready --context default
+          k3sup ready --context default --pause 5s
           kubectl config use-context default
           
       - name: Wait until all Kubernetes nodes are ready ${{ matrix.k3s }}
@@ -60,5 +60,5 @@ jobs:
 
       - name: Show k3s logs
         if: always()
-        run: journalctl -u k3s
+        run: sudo systemctl status k3s --no-pager -l && sudo journalctl -u k3s
 
