@@ -69,4 +69,3 @@ jobs:
       - name: Show k3s logs
         if: always()
         run: sudo systemctl status k3s --no-pager -l && sudo journalctl -u k3s
-
