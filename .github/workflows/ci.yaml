@@ -26,6 +26,7 @@ jobs:
          k3s: [v1.20, v1.21, v1.22, v1.23, v1.24, v1.25, v1.26, v1.27]
          os: [actuated-arm64-8cpu-16gb]
 
+
 #         os: [ubuntu-latest, actuated-8cpu-8gb]
 
 # Anything under v1.20 requires Ubuntu 20.04 due to a cgroups v1 requirement. 
