@@ -21,12 +21,9 @@ jobs:
     runs-on: ${{ matrix.os }}
 
     strategy:
-#      max-parallel: 1
       matrix:
          k3s: [v1.20, v1.21, v1.22, v1.23, v1.24, v1.25, v1.26, v1.27]
          os: [actuated-arm64-8cpu-16gb]
-
-#         os: [ubuntu-latest, actuated-8cpu-8gb]
 
 # Anything under v1.20 requires Ubuntu 20.04 due to a cgroups v1 requirement. 
 #        k3s: [v1.16, v1.17,v1.18,v1.19]
@@ -50,8 +47,6 @@ jobs:
             --merge \
             --context default
           cat $HOME/.kube/config
-
-#      - uses: self-actuated/connect-ssh@master
 
       - name: Wait until K3s ${{ matrix.k3s }} is ready
         run: |
