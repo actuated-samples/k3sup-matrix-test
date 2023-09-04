@@ -28,7 +28,7 @@ jobs:
 # Anything under v1.20 requires Ubuntu 20.04 due to a cgroups v1 requirement. 
 #        k3s: [v1.16, v1.17,v1.18,v1.19]
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v4
       - name: Setup mirror
         uses: self-actuated/hub-mirror@master
       - uses: alexellis/arkade-get@master
