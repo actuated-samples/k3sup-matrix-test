@@ -24,7 +24,7 @@ jobs:
 #      max-parallel: 1
       matrix:
          k3s: [v1.20, v1.21, v1.22, v1.23, v1.24, v1.25, v1.26, v1.27]
-         os: [actuated-8cpu-arm64-16gb]
+         os: [actuated-arm64-8cpu-16gb]
 
 #         os: [ubuntu-latest, actuated-8cpu-8gb]
 
