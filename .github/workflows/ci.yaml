@@ -1,6 +1,5 @@
 name: k3s-test-matrix
 
-
 on:
   pull_request:
     branches:
@@ -10,7 +9,6 @@ on:
       - master
       - main
   workflow_dispatch:
-
 
 permissions:
   id-token: write
