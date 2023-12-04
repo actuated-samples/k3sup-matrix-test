@@ -20,6 +20,7 @@ jobs:
     name: k3s-test-${{ matrix.k3s }}-${{ matrix.os }}
     runs-on: ${{ matrix.os }}
 
+
     strategy:
       matrix:
         k3s: [v1.20, v1.21, v1.22, v1.23, v1.24, v1.25, v1.26, v1.27, v1.28]
