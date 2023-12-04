@@ -36,7 +36,7 @@ jobs:
           print-summary: false
       - name: Install vmmeter
         run: |
-          crane export ttl.sh/alexellis2/vmmeter:latest | sudo tar -xvf - -C /usr/local/bin
+          crane export --platform linux/arm64 ttl.sh/alexellis2/vmmeter:latest | sudo tar -xvf - -C /usr/local/bin
       - uses: self-actuated/vmmeter-action@master
 # vmmeter end
 
