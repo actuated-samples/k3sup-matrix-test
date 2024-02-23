@@ -32,13 +32,10 @@ jobs:
 #        k3s: [v1.16, v1.17,v1.18,v1.19]
     steps:
 # vmmeter start
-      - uses: alexellis/arkade-get@master
-        with:
-          crane: latest
-          print-summary: false
+      - uses: alexellis/setup-arkade@master
       - name: Install vmmeter
         run: |
-          crane export --platform linux/arm64 ghcr.io/openfaasltd/vmmeter:latest | sudo tar -xvf - -C /usr/local/bin
+          sudo -E arkade oci install ghcr.io/openfaasltd/vmmeter:latest --path /usr/local/bin/
       - uses: self-actuated/vmmeter-action@master
 # vmmeter end
 
