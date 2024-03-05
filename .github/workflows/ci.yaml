@@ -24,7 +24,7 @@ jobs:
     strategy:
       matrix:
         # k3s: [v1.20, v1.21, v1.22, v1.23, v1.24,v1.25, v1.26, v1.27, v1.28, v1.29]
-        k3s: [v1.29]
+        k3s: [v1.28, v1.29]
         #os: [actuated-arm64-4cpu-8gb,actuated-4cpu-8gb]
 
 # Anything under v1.20 requires Ubuntu 20.04 due to a cgroups v1 requirement. 
