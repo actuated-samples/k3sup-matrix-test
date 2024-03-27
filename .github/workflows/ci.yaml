@@ -20,7 +20,7 @@ jobs:
   kubernetes:
     name: k3s-test-${{ matrix.k3s }}
     #runs-on: ${{ matrix.os }}
-    runs-on: [actuated-2cpu-4gb,ae]
+    runs-on: [actuated-arm64-2cpu-4gb]
 
     strategy:
       matrix:
