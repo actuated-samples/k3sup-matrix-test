@@ -16,7 +16,6 @@ permissions:
   actions: read
 
 jobs:
-
   kubernetes:
     name: k3s-test-${{ matrix.k3s }}
     #runs-on: ${{ matrix.os }}
