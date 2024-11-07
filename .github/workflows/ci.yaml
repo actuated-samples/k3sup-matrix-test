@@ -19,13 +19,13 @@ jobs:
   kubernetes:
     name: k3s-test-${{ matrix.k3s }}
     #runs-on: ${{ matrix.os }}
-    runs-on: [actuated-arm64-2cpu-4gb]
+    runs-on: [actuated-2cpu-4gb, n100]
 
     strategy:
       # max-parallel: 1
       matrix:
         # k3s: [v1.20, v1.21, v1.22, v1.23, v1.24,v1.25, v1.26, v1.27, v1.28, v1.29]
-        k3s: [ v1.26, v1.27, v1.28, v1.29,v1.30]
+        k3s: [ v1.27, v1.28, v1.29,v1.30]
         #os: [actuated-arm64-4cpu-8gb,actuated-4cpu-8gb]
 # Anything under v1.20 requires Ubuntu 20.04 due to a cgroups v1 requirement. 
 #        k3s: [v1.16, v1.17,v1.18,v1.19]
