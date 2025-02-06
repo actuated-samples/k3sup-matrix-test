@@ -19,7 +19,7 @@ jobs:
   kubernetes:
     name: k3s-test-${{ matrix.k3s }}
     #runs-on: ${{ matrix.os }}
-    runs-on: [actuated-4cpu-16gb]
+    runs-on: [actuated-arm64-4cpu-16gb]
 
     strategy:
       # max-parallel: 1
@@ -32,7 +32,7 @@ jobs:
     steps:
 # vmmeter start
       - uses: alexellis/setup-arkade@master
-      - uses: self-actuated/vmmeter-action@master
+      # - uses: self-actuated/vmmeter-action@master
 # vmmeter end
 
       - uses: actions/checkout@v4
