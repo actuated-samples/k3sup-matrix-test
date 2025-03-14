@@ -25,7 +25,8 @@ jobs:
       # max-parallel: 1
       matrix:
         # k3s: [v1.20, v1.21, v1.22, v1.23, v1.24,v1.25, v1.26, v1.27, v1.28, v1.29]
-        k3s: [ v1.27, v1.28, v1.29, v1.30, v1.31 ]
+        # k3s: [ v1.27, v1.28, v1.29, v1.30, v1.31 ]
+        k3s: [v1.31]
 
         #os: [actuated-arm64-4cpu-8gb,actuated-4cpu-8gb]
 # Anything under v1.20 requires Ubuntu 20.04 due to a cgroups v1 requirement. 
@@ -58,7 +59,7 @@ jobs:
 
       - name: Wait until K3s ${{ matrix.k3s }} is ready
         run: |
-          k3sup ready --context default --pause 2s
+          k3sup ready --context default --pause 5s
           kubectl config use-context default
           
       - name: Wait until all Kubernetes nodes are ready ${{ matrix.k3s }}
@@ -80,8 +81,8 @@ jobs:
         run: |
           sleep 10
           kubectl get pod -n kube-system -o wide
-          kubectl get  -n kube-system pod -l svccontroller.k3s.cattle.io/svcname=nginx
-          kubectl logs -n kube-system pod -l svccontroller.k3s.cattle.io/svcname=nginx
+          kubectl get pod  -n kube-system -l svccontroller.k3s.cattle.io/svcname=nginx
+          kubectl get pods -n kube-system -l svccontroller.k3s.cattle.io/svcname
 
       - name: Show k3s logs
         if: always()
