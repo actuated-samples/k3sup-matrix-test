@@ -81,8 +81,11 @@ jobs:
         run: |
           sleep 10
           kubectl get pod -n kube-system -o wide
-          kubectl get pod  -n kube-system -l svccontroller.k3s.cattle.io/svcname=nginx
-          kubectl get pods -n kube-system -l svccontroller.k3s.cattle.io/svcname
+          kubectl wait --for=condition=Ready pod  -n kube-system -l svccontroller.k3s.cattle.io/svcname=nginx-1 --timeout 2m
+
+          kubectl get pod  -n kube-system -l svccontroller.k3s.cattle.io/svcname=nginx-1
+          kubectl logs -n kube-system  -l svccontroller.k3s.cattle.io/svcname=nginx-1
+
 
       - name: Show k3s logs
         if: always()
