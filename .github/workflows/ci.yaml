@@ -75,8 +75,8 @@ jobs:
           kubectl apply -f https://raw.githubusercontent.com/openfaas/faas-netes/master/artifacts/crds/openfaas.com_functions.yaml
       - name: Expose nginx with svclb
         run: |
-          kubectl run nginx-1 --image=nginx --port=80 --restart=Always
-          kubectl expose pod/nginx-1 --port=80 --type=LoadBalancer
+          kubectl run nginx-1 --image=nginx --port=8080 --restart=Always
+          kubectl expose pod/nginx-1 --port=8080 --type=LoadBalancer
       - name: Look for svclb
         run: |
           sleep 10
