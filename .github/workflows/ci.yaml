@@ -34,13 +34,14 @@ jobs:
 #        k3s: [v1.16, v1.17,v1.18,v1.19]
     steps:
 # vmmeter start
-      - uses: alexellis/setup-arkade@master
+      # - uses: alexellis/setup-arkade@master
       # - uses: self-actuated/vmmeter-action@master
 # vmmeter end
 
       - uses: actions/checkout@v4
       - name: Setup mirror
         uses: self-actuated/hub-mirror@master
+
       - uses: alexellis/arkade-get@master
         with:
           print-summary: false
@@ -86,6 +87,7 @@ jobs:
         run: |
           kubectl run nginx-1 --image=nginx --port=8080 --restart=Always
           kubectl expose pod/nginx-1 --port=8080 --type=LoadBalancer
+
       - name: Look for svclb
         run: |
           sleep 10
