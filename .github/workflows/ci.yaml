@@ -74,6 +74,14 @@ jobs:
         run: |
           echo "Applying CRD"
           kubectl apply -f https://raw.githubusercontent.com/openfaas/faas-netes/master/artifacts/crds/openfaas.com_functions.yaml
+      - name: Wait for default service account
+        run: |
+          echo "Waiting for default service account..."
+          for i in {1..30}; do
+            kubectl get sa default && break
+            sleep 0.5
+          done
+
       - name: Expose nginx with svclb
         run: |
           kubectl run nginx-1 --image=nginx --port=8080 --restart=Always
