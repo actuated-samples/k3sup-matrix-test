@@ -64,24 +64,27 @@ jobs:
           k3sup ready --context default --pause 5s
           kubectl config use-context default
           
-      - name: Wait until all Kubernetes nodes are ready ${{ matrix.k3s }}
-        run: |
-          # Just an extra test on top.
-          echo "Waiting for nodes to be ready ..."
-          kubectl wait --for=condition=Ready nodes --all --timeout=5m
-          kubectl get nodes -o wide
+      # Already in "k3sup ready"
+      # - name: Wait until all Kubernetes nodes are ready ${{ matrix.k3s }}
+      #   run: |
+      #     # Just an extra test on top.
+      #     echo "Waiting for nodes to be ready ..."
+      #     kubectl wait --for=condition=Ready nodes --all --timeout=5m
+      #     kubectl get nodes -o wide
           
       - name: Apply CRD
         run: |
           echo "Applying CRD"
           kubectl apply -f https://raw.githubusercontent.com/openfaas/faas-netes/master/artifacts/crds/openfaas.com_functions.yaml
-      - name: Wait for default service account
-        run: |
-          echo "Waiting for default service account..."
-          for i in {1..30}; do
-            kubectl get sa default && break
-            sleep 0.5
-          done
+
+      # # Now part of "k3sup ready"
+      # - name: Wait for default service account
+      #   run: |
+      #     echo "Waiting for default service account..."
+      #     for i in {1..30}; do
+      #       kubectl get sa default && break
+      #       sleep 0.5
+      #     done
 
       - name: Expose nginx with svclb
         run: |
